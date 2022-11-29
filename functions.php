@@ -81,7 +81,8 @@ function getCaption($post) {
         if (!in_array($spec->title, $neededSpecs))
             continue;
 
-        if ($spec->title === "قیمت") {
+        // Find Price
+        if (!$price && in_array($spec->title, ["قیمت فروش نقدی", "قیمت", "قیمت کل"])) {
             $price = $spec->value;
             continue;
         }
@@ -89,7 +90,7 @@ function getCaption($post) {
         $specifics .= "$spec->title: <b>$spec->value</b>\n";
     }
 
-    return "آگهی " . $post->header->title . " (<b>" . $price . "</b>)"
+    return "آگهی " . $post->header->title . ($price ? " (<b>" . $price . "</b>)" : null)
         . PHP_EOL . PHP_EOL . htmlspecialchars($post->description)
         . PHP_EOL . PHP_EOL . $specifics
         . PHP_EOL . "محل: " . "<b>" . $post->header->place . "</b>"
