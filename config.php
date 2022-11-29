@@ -9,3 +9,4 @@ $neededSpecs = [
     "رنگ",
     "قیمت"
 ];
+//$neededSpecs = '*';

@@ -77,8 +77,14 @@ function getCaption($post) {
 
     $price = null;
     $specifics = "";
+    $notAllSpecs = is_array($neededSpecs);
+
     foreach ($post->list_data as $spec) {
-        if (!in_array($spec->title, $neededSpecs))
+        if (!isset($spec->value))
+            continue;
+
+        // If not configured to show all specs, ignore specs which not in the neededSpecs array
+        if ($notAllSpecs && !in_array($spec->title, $neededSpecs))
             continue;
 
         // Find Price
