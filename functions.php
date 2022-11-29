@@ -112,9 +112,13 @@ function divarRequest($url) {
     $response = json_decode(curl_exec($ch));
 
     if (curl_errno($ch) || !$response)
-        die("Error:" . curl_error($ch));
+        die("curl error:" . curl_error($ch));
 
     curl_close($ch);
+
+    // These keys are contains a huge amount of useless data, let's not waste memory
+    unset($response->schema);
+    unset($response->input_suggestion);
 
     return $response;
 }
