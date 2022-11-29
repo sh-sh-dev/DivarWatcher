@@ -8,7 +8,7 @@ $lastToken = trim(file_get_contents("last_token"));
 
 $response = divarRequest($url);
 
-$postsList = $response->widget_list;
+$postsList = $response->web_widgets->post_list;
 
 for ($i = 0; $i < count($postsList); $i++) {
     $post = $postsList[$i]->data;
